@@ -32,4 +32,11 @@ Load unseen tweets
 
 That command is good for doing an initial load of tweets from representatives.  However, the API calls are more efficient if you load tweets since a previously-seen tweet ID rather than a date.  To do that, you could run this script:
 
-    cat appalachian_reps_twitter_screen_names.txt | ./scripts/fetch_unseen_tweets.sh 
+    cat appalachian_reps_twitter_screen_names.txt | ./scripts/fetch_unseen_tweets.sh
+
+Search for tweets
+-----------------
+
+    congressional_tweets search_tweets ".*Town Hall.*" ".*townhall.*" | ndjson-map '{"screen_name": d.user.screen_name, "text": d.text, "id": d.id, "created_at": d.created_at}'
+
+This example uses the super-helpful [ndjson-cli](https://github.com/mbostock/ndjson-cli) program to filter out some of the tweets from the database.
