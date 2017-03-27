@@ -37,6 +37,10 @@ That command is good for doing an initial load of tweets from representatives.  
 Search for tweets
 -----------------
 
-    congressional_tweets search_tweets ".*Town Hall.*" ".*townhall.*" | ndjson-map '{"screen_name": d.user.screen_name, "text": d.text, "id": d.id, "created_at": d.created_at}'
+    congressional_tweets search_tweets ".*Town Hall.*" ".*townhall.*" |\
+    ndjson-map '{"screen_name": d.user.screen_name, "text": d.text, "id": d.id_str, "created_at": d.created_at, "url": "https://twitter.com/" + d.user.screen_name + "/status/" + d.id_str}' |\
+    in2csv --format ndjson > tweets.csv
 
-This example uses the super-helpful [ndjson-cli](https://github.com/mbostock/ndjson-cli) program to filter out some of the tweets from the database.
+This example uses the super-helpful [ndjson-cli](https://github.com/mbostock/ndjson-cli) program to filter out only the most useful fields for human review from the database.
+
+It also uses the `in2csv` command from csvkit to convert from ndjson to CSV to more easily view records in tabular format.some of the tweets from the database.
