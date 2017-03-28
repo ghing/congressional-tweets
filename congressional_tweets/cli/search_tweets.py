@@ -1,3 +1,4 @@
+import re
 from urllib.parse import urlparse
 
 from pymongo import MongoClient, DESCENDING
@@ -54,7 +55,7 @@ def main(args):
     for query in args.query:
         text_query.append({
             'text': {
-                '$regex': query,
+                '$regex': re.compile(query, re.IGNORECASE),
             },
         })
 
