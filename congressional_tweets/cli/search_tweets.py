@@ -15,6 +15,8 @@ def add_parser(subparsers):
         default="tweets")
     parser.add_argument('--screen-name',
         help="Only search tweets from this screen name.")
+    parser.add_argument('--since-id',
+        help="Only search tweets with IDs greater than this ID.")
 
     parser.add_argument('query', help="Regex to search for in tweet text.",
         nargs='+')
@@ -37,12 +39,24 @@ def main(args):
 
     find_args = {}
 
-    if args.screen_name is not None:
-        find_args['$and'] = [
-            {
-                'user.screen_name': args.screen_name,
-            },
-        ]
+    if args.screen_name is not None or args.since_id is not None:
+        find_args['$and'] = []
+        if args.screen_name is not None:
+            find_args['$and'].append(
+                {
+                    'user.screen_name': args.screen_name,
+                },
+            )
+
+        if args.since_id is not None:
+            find_args['$and'].append(
+                {
+                    'id': {
+                        '$gt': int(args.since_id),
+                    },
+                },
+            )
+
         text_query = []
         find_args['$and'].append({
             '$or': text_query,
