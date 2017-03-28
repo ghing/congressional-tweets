@@ -1,7 +1,6 @@
-import json
 from urllib.parse import urlparse
 
-from pymongo import MongoClient
+from pymongo import MongoClient, DESCENDING
 from bson.json_util import dumps
 
 
@@ -59,5 +58,5 @@ def main(args):
             },
         })
 
-    for tweet in collection.find(find_args):
+    for tweet in collection.find(find_args).sort('id', DESCENDING):
         print(dumps(tweet))
