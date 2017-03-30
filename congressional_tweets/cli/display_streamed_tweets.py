@@ -4,7 +4,7 @@ import zmq
 
 
 def add_parser(subparsers):
-    parser = subparsers.add_parser('display_stream_tweets',
+    parser = subparsers.add_parser('display_streamed_tweets',
         description="Display streamed tweets.")
 
     parser.add_argument('--url',
