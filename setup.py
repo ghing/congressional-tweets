@@ -27,6 +27,7 @@ setup(
         install_requires=[
             'tweepy',
             'pymongo',
+            'pyzmq',
         ],
         tests_require=[
         ],

@@ -2,11 +2,15 @@ import json
 import os
 
 import tweepy
+import zmq
 
 
 class StandardOutputStreamListener(tweepy.StreamListener):
+    def set_socket(self, socket):
+        self._socket = socket
+
     def on_status(self, status):
-        print(json.dumps(status))
+        self._socket.send_string('status ' + json.dumps(status._json))
 
     def on_error(self, status_code):
         print(status_code)
@@ -30,6 +34,9 @@ def add_parser(subparsers):
         default=os.environ.get('TWITTER_ACCESS_TOKEN'))
     parser.add_argument('--access-token-secret',
         default=os.environ.get('TWITTER_ACCESS_TOKEN_SECRET'))
+    parser.add_argument('--url',
+        default=os.environ.get('CONGRESSIONAL_TWEETS_STREAMING_URL',
+            "tcp://127.0.0.1:5557"))
 
     parser.set_defaults(func=main)
 
@@ -39,10 +46,15 @@ def main(args):
     auth.set_access_token(args.access_token, args.access_token_secret)
     api = tweepy.API(auth)
 
+    context = zmq.Context()
+    zmq_socket = context.socket(zmq.PUB)
+    zmq_socket.bind(args.url)
+
     # Docs on Tweepy streaming are here:
     # https://tweepy.readthedocs.io/en/v3.5.0/streaming_how_to.html
 
     stream_listener = StandardOutputStreamListener()
+    stream_listener.set_socket(zmq_socket)
     stream = tweepy.Stream(auth=api.auth, listener=stream_listener)
 
     # Use the filter streaming endpoint
