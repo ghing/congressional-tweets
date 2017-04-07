@@ -1,8 +1,16 @@
 import json
 import os
+import signal
+import sys
 
 import tweepy
 import zmq
+
+
+def handle_sigint(signum, frame):
+    sys.exit()
+
+signal.signal(signal.SIGINT, handle_sigint)
 
 
 class StandardOutputStreamListener(tweepy.StreamListener):

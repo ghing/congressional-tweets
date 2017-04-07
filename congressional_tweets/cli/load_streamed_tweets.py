@@ -1,9 +1,17 @@
 import json
 import os
+import signal
+import sys
 from urllib.parse import urlparse
 
 from pymongo import MongoClient
 import zmq
+
+
+def handle_sigint(signum, frame):
+    sys.exit()
+
+signal.signal(signal.SIGINT, handle_sigint)
 
 
 def add_parser(subparsers):

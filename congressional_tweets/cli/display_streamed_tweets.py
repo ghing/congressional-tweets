@@ -1,6 +1,14 @@
 import os
+import signal
+import sys
 
 import zmq
+
+
+def handle_sigint(signum, frame):
+    sys.exit()
+
+signal.signal(signal.SIGINT, handle_sigint)
 
 
 def add_parser(subparsers):
