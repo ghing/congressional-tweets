@@ -42,3 +42,14 @@ Search for tweets
 This example uses the super-helpful [ndjson-cli](https://github.com/mbostock/ndjson-cli) program to filter out only the most useful fields for human review from the database.
 
 It also uses the `in2csv` command from csvkit to convert from ndjson to CSV to more easily view records in tabular format.some of the tweets from the database.
+
+Stream tweets into a database
+-----------------------------
+
+    congressional_tweets load_stream_tweets
+    congressional_tweets stream_tweets
+
+Running on systemd
+------------------
+
+In production, I'm using systemd on Ubuntu 16.04 to supervise the `load_stream_tweets` and `stream_tweets` commands.  You can find some example unit files for runnig these commands as systemd services in the `systemd` directory.

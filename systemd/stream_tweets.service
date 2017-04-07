@@ -1,0 +1,12 @@
+[Unit]
+Description=Tweet Streaming Service
+
+[Service]
+EnvironmentFile=/home/geoffhing/apps/congressional-tweets/.env
+ExecStart=/home/geoffhing/venvs/congressional-tweets/bin/congressional_tweets stream_tweets $CONGRESSIONAL_USER_IDS
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
+Alias=stream_tweets.service
