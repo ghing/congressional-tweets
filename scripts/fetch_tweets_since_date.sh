@@ -2,6 +2,8 @@
 
 set -eu
 
+screen_names=""
+
 while [[ $# -gt 1 ]]
 do
 key="$1"
@@ -13,12 +15,15 @@ case $key in
     ;;
     *)
     # unknown option
+    screen_names="$screen_names $key"
     ;;
 esac
 shift # past argument or value
 done
 
-while read screen_name 
+screen_names="$screen_names $1"
+
+for screen_name in $screen_names
 do
   congressional_tweets fetch_tweets --since-date "$SINCE" "$screen_name" | congressional_tweets load_tweets
-done < "${1:-/dev/stdin}"
+done

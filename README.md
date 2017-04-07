@@ -23,16 +23,14 @@ Load only unsaved tweets
 Load tweets for a number of representatives since a given date
 --------------------------------------------------------------
 
-Assuming you have a file with one screen name per row:
-
-    cat appalachian_reps_twitter_screen_names.txt | ./scripts/fetch_tweets_since_date.sh --since 2017-01-19
+    ./scripts/fetch_tweets_since_date.sh --since 2017-01-19 RepJohnDelaney RepMGriffith RepHalRogers repgoodlatte DrPhilRoe
 
 Load unseen tweets
 ------------------
 
 That command is good for doing an initial load of tweets from representatives.  However, the API calls are more efficient if you load tweets since a previously-seen tweet ID rather than a date.  To do that, you could run this script:
 
-    cat appalachian_reps_twitter_screen_names.txt | ./scripts/fetch_unseen_tweets.sh
+    ./scripts/fetch_unseen_tweets.sh RepJohnDelaney RepMGriffith RepHalRogers repgoodlatte DrPhilRoe
 
 Search for tweets
 -----------------
