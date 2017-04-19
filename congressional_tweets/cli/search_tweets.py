@@ -14,7 +14,8 @@ def add_parser(subparsers):
     parser.add_argument('--collection', help="MongoDB collection",
         default="tweets")
     parser.add_argument('--screen-name',
-        help="Only search tweets from this screen name.")
+        help="Only search tweets from this screen name.",
+        action='append')
     parser.add_argument('--since-id',
         help="Only search tweets with IDs greater than this ID.")
 
@@ -44,7 +45,9 @@ def main(args):
         if args.screen_name is not None:
             find_args['$and'].append(
                 {
-                    'user.screen_name': args.screen_name,
+                    'user.screen_name': {
+                        '$in': args.screen_name,
+                    },
                 },
             )
 
