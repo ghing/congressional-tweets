@@ -71,7 +71,7 @@ def main(args):
 
     for query in args.query:
         text_query.append({
-            'text': {
+            '$text': {
                 '$search': query,
             },
         })
