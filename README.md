@@ -49,6 +49,24 @@ Stream tweets into a database
     congressional_tweets load_stream_tweets
     congressional_tweets stream_tweets
 
+Database migrations
+-------------------
+
+Some of my database needs changed in the process of developing this app.  I couldn't find a Python MongoDB migration library that I liked.  There were some NodeJS ones that seemed reasonable, but I didn't want to add Node as a dependency.  So, I just wrote migrations as JavaScript that can be run as a [script for the mongo shell](https://docs.mongodb.com/manual/tutorial/write-scripts-for-the-mongo-shell/).
+
+To run a migration:
+
+    mongo congressional_tweets migrations/0002_text_index_up.js
+
+To reverse it:
+
+    mongo congressional_tweets migrations/0002_text_index_down.js
+
+If you just want to get set up initially:
+
+    mongo congressional_tweets migrations/0002_initial_up.js
+    mongo congressional_tweets migrations/0002_text_index_up.js
+
 Running on systemd
 ------------------
 
