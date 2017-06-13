@@ -72,7 +72,7 @@ def main(args):
     for query in args.query:
         text_query.append({
             'text': {
-                '$regex': re.compile(query, re.IGNORECASE),
+                '$search': query,
             },
         })
 
