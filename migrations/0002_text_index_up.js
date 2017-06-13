@@ -18,7 +18,7 @@ db.tweets.createIndex(
   }  
 );
 
-db.migrations.insertOne({
+db.migrations.insert({
   migration: MIGRATION_ID,
   created: new Date()
 });
