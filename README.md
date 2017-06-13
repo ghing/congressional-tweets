@@ -3,6 +3,11 @@ congressional-tweets
 
 Fetch and store Tweets for members of congress.  Really this will work for any users tweets, but I'm using it for tweets by members of the United States House of Representatives.
 
+Assumptions
+-----------
+
+* MongoDB 3.4 (if you want to store tweets in a local database)
+
 Fetch tweets
 ------------
 
