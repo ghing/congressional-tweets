@@ -56,16 +56,16 @@ Some of my database needs changed in the process of developing this app.  I coul
 
 To run a migration:
 
-    mongo congressional_tweets migrations/0002_text_index_up.js
+    mongo congressional-tweets migrations/0002_text_index_up.js
 
 To reverse it:
 
-    mongo congressional_tweets migrations/0002_text_index_down.js
+    mongo congressional-tweets migrations/0002_text_index_down.js
 
 If you just want to get set up initially:
 
-    mongo congressional_tweets migrations/0002_initial_up.js
-    mongo congressional_tweets migrations/0002_text_index_up.js
+    mongo congressional-tweets migrations/0002_initial_up.js
+    mongo congressional-tweets migrations/0002_text_index_up.js
 
 Running on systemd
 ------------------
