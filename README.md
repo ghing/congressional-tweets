@@ -71,6 +71,7 @@ If you just want to get set up initially:
 
     mongo congressional-tweets migrations/0002_initial_up.js
     mongo congressional-tweets migrations/0002_text_index_up.js
+    mongo congressional-tweets migrations/0003_id_index_up.js
 
 Running on systemd
 ------------------
